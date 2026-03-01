@@ -239,7 +239,7 @@ class CalendarBusyCal {
     }
     
     private func log(_ message: String) {
-        logger.info("\(message)")
+        logger.notice("\(message, privacy: .public)")
     }
     
     private func isWeekend(_ date: Date) -> Bool {
