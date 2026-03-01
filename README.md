@@ -72,10 +72,7 @@ This stops and removes the launchd agent. Existing "Busy" events in your destina
 ## Logs
 
 ```bash
-cat /tmp/busycal.out    # stdout
-cat /tmp/busycal.err    # stderr
+log show --predicate 'subsystem == "com.user.busycal"' --last 1h
 ```
 
-## License
-
-[MIT](LICENSE)
+Or use Console.app and filter by subsystem `com.user.busycal`.

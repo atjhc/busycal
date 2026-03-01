@@ -1,5 +1,6 @@
 import Foundation
 import EventKit
+import os
 
 // CONFIGURATION — all values read from environment variables with sensible defaults
 private let env = ProcessInfo.processInfo.environment
@@ -14,6 +15,8 @@ let FILTER_WEEKENDS = env["BUSYCAL_FILTER_WEEKENDS"].map { $0 == "true" } ?? tru
 let FILTER_NON_WORK_HOURS = env["BUSYCAL_FILTER_NON_WORK_HOURS"].map { $0 == "true" } ?? true
 let WORK_START_HOUR = env["BUSYCAL_WORK_START_HOUR"].flatMap(Int.init) ?? 8
 let WORK_END_HOUR = env["BUSYCAL_WORK_END_HOUR"].flatMap(Int.init) ?? 18
+
+private let logger = Logger(subsystem: "com.user.busycal", category: "sync")
 
 class CalendarBusyCal {
     private let eventStore = EKEventStore()
@@ -235,14 +238,8 @@ class CalendarBusyCal {
         return formatter.string(from: date)
     }
     
-    private func timestamp() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return formatter.string(from: Date())
-    }
-    
     private func log(_ message: String) {
-        print("[\(timestamp())] \(message)")
+        logger.info("\(message)")
     }
     
     private func isWeekend(_ date: Date) -> Bool {

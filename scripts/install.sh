@@ -114,10 +114,6 @@ $ENV_ENTRIES
     <integer>3600</integer>
     <key>RunAtLoad</key>
     <true/>
-    <key>StandardOutPath</key>
-    <string>/tmp/busycal.out</string>
-    <key>StandardErrorPath</key>
-    <string>/tmp/busycal.err</string>
 </dict>
 </plist>
 EOF
@@ -129,7 +125,7 @@ echo ""
 echo "BusyCal installed successfully!"
 echo ""
 echo "The sync will run every hour and on login."
-echo "Logs: /tmp/busycal.out and /tmp/busycal.err"
+echo "Logs: log show --predicate 'subsystem == \"com.user.busycal\"' --last 1h"
 echo ""
 echo "NOTE: On first run, macOS will prompt you to grant Calendar access."
 echo "If denied, go to System Settings > Privacy & Security > Calendars."
