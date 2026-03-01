@@ -15,7 +15,7 @@ if [ ! -f "$EXECUTABLE" ]; then
 fi
 
 echo "==> Signing executable..."
-codesign -s - "$EXECUTABLE"
+codesign -s "${CODESIGN_IDENTITY:--}" "$EXECUTABLE"
 
 echo "==> Build succeeded: $EXECUTABLE"
 echo ""
